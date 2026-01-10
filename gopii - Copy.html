@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="" id="inp" placeholder="Please enter any text">
+    <input type="number" name="" id="c" placeholder="Pleaase enter any count">
+
+    <button onclick="vs()">Click me</button>
+
+    <div id="op"></div>
+    <script>
+        function vs(){
+            var inp = document.getElementById("inp").value;
+            var c = document.getElementById("c").value;
+            var op = document.getElementById("op");
+
+            op.innerHTML = (inp + "<br>").repeat(c);
+        }
+
+    </script>
+</body>
+</html>

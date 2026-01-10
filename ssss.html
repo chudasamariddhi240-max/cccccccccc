@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vs</title>
+</head>
+<body>
+   
+    <input type="text" placeholder="enter your sweet name.." id="inp"> 
+    <input type="text" placeholder="enter your last name.." id="inp2"> 
+    <div id="op"></div>
+    <button onclick="vs()">click me</button>
+
+    <script>
+        function vs(){
+            var inp = document.getElementById("inp").value;
+            var inp2 = document.getElementById("inp2").value;
+
+            var op = document.getElementById("op");
+
+            op.innerHTML =  Hello, ${inp} ${inp2}
+        }
+    </script>
+</body>
+</html>

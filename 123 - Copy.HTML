@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login / Sign Up</title>
+</head>
+<body>
+  <h2 id="title">Sign Up</h2>
+  <input type="text" id="username" placeholder="Enter your username..">
+  <input type="password" id="password" placeholder="Enter your password..">
+  <button onclick="kp()">Sign Up</button>
+  <p onclick="change()" style="color: blue; cursor: pointer;">Already have an account? Login</p>
+  <p id="message" style="color: green;"></p>
+
+  <script>
+    let login = false;
+
+    function change() {
+      login = !login;
+      document.getElementById("title").innerText = login ? "Login" : "Sign Up";
+      document.querySelector("button").innerText = login ? "Login" : "Sign Up";
+      document.querySelector("p").innerText = login ? "Don't have an account? Sign Up" : "Already have an account? Login";
+      document.getElementById("message").innerText = ""; // Clear message
+    }
+
+    function kp() {
+      var user = document.getElementById("username").value;
+      var pass = document.getElementById("password").value;
+
+      if (!user || !pass) {
+        document.getElementById("message").innerText = "Please fill out both fields.";
+        return;
+      }
+
+      if (!login) {
+        // Sign Up mode
+        localStorage.setItem("user", user);
+        localStorage.setItem("pass", pass);
+        document.getElementById("message").innerText = "Sign up successful! Please log in.";
+        change(); // Switch to login mode
+      } else {
+        // Login mode
+        const savedUser = localStorage.getItem("user");
+        const savedPass = localStorage.getItem("pass");
+
+        if (user === savedUser && pass === savedPass) {
+          document.getElementById("message").innerText = "Login successful!";'/'
+        } else {
+          document.getElementById("message").innerText = "Invalid username or password.";
+        }
+      }
+      document.getElementById("password").value = ""; 
+      document.getElementById("username").value = "";
+      window.location.href = "https://www.google.com";  
+      }
+  </script>
+</body>
+</html>,<div class="3">
+</div>

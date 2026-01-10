@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="vs('stone')">stone</button>
+    <button onclick="vs('paper')">paper</button>
+    <button onclick="vs('sci')">sci</button>
+    <div id="op"></div>
+    <script>
+        function vs(uc){
+            var op = document.getElementById("op");
+
+            var r = Math.random();
+
+            if(r>.7){
+                var cc = "stone"
+            }
+            else if(r > .4){
+                cc = "paper";
+            }
+            else{
+                cc = "sci";
+
+            }
+
+
+
+            if(uc == cc){
+                op.innerHTML = "math is tie..."
+                op.style.color = "blue"
+            }
+            else if(
+                (uc == "stone" && cc == "sci") ||
+                (uc == "paper" && cc=="stone") ||
+                (uc == "sci" && cc == "paper")
+            ){
+                op.innerHTML = "You win.."
+                op.style.color = "green"
+            }
+
+            else{
+                op.innerHTML = "Sorry Better Luck next time";
+                op.style.color = "red"
+            }
+
+            console.log(uc);
+            console.log(cc);
+            
+        }
+    </script>
+</body>
+</html>

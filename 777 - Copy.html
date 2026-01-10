@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>VS</title>
+</head>
+<body>
+  <div id="op">0</div>
+  <button onclick="sv()">Pre</button>
+  <button onclick="vs()">Next</button>
+  <script>
+    var op = document.getElementById("op");
+    let index = 0;
+    let max = 5;
+    function vs(){
+        index = (index +1)%max
+        op.innerHTML = index
+
+        console.log();
+        
+    }
+    
+    function sv(){
+        index = (index - 1 + max)%max
+        op.innerHTML = index
+
+
+
+    }
+  </script>
+</body>
+</html>

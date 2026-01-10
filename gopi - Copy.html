@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box{
+            width: 200px;
+            height: 200px;
+            background: lightblue;
+        }
+    </style>
+</head>
+<body>
+    <button id="bg">CLick me</button>
+    <div id="box"></div>
+
+
+    <input type="text" id="inp">
+
+    <div id="op"></div>
+    <script>
+        document.getElementById("bg").addEventListener("click", function(){
+            const radhika = ['red','blue', 'yellow', 'green', 'pink'];
+            var rn = Math.floor( Math.random()*6) 
+            console.log(rn);
+            
+
+            document.getElementById("box").style.background =radhika[rn];
+            
+        })
+
+        document.getElementById("inp").addEventListener("keyup", function(){
+            document.getElementById("op").innerHTML = this.value;
+        })
+    </script>
+</body>
+</html>

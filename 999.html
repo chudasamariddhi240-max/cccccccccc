@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="op"></div>
+    <script>
+
+        function vs(){
+
+            var op = document.getElementById("op");
+            var n = new Date();
+            
+            var  h = n.getHours()
+            var  m = n.getMinutes()
+            var s = n.getSeconds()
+            var d = n.getDay();
+            op.innerHTML =${h} : ${m} : ${s} : ${d};
+        }
+
+        
+        setInterval(vs,1000)
+    </script>
+</body>
+
+</html>

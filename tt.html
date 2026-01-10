@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #op{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="op">This is notification, this will disappear in 3 seconds</div>
+    <button onclick="vs()">Click me</button>
+
+    <script>
+        function vs(){
+            var op = document.getElementById("op");
+
+            op.style.display = "block"
+            
+            function sv(){
+                op.style.display = "none"
+
+            }
+
+            setTimeout(sv, 3000)
+        }
+    </script>
+</body>
+</html>                  `

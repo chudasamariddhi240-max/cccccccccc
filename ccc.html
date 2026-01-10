@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vs</title>
+</head>
+
+<body>
+
+    <input type="text" name="" id="inp">
+    <button onclick="vs()">Click me</button>
+    <div id="op"></div>
+    <script>
+
+        function vs() {
+            var inp = document.getElementById("inp").value;
+            var op = document.getElementById("op");
+
+
+        for(let i = 1; i<=10; i++){
+
+            op.innerHTML += ${inp} x ${i} = ${inp*i} <br>
+
+        }
+        }
+
+    </script>
+</body>
+
+</html>

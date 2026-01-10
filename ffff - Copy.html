@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        
+import React, { useState, useEffect } from 'react';
+
+function VCCOnlineStatus() {
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+  useEffect(() => {
+    function handleOnline() {
+      setIsOnline(true);
+    }
+
+    function handleOffline() {
+      setIsOnline(false);
+    }
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+
+  return (
+    <div style={{ padding: '30px', textAlign: 'center' }}>
+      <h2>🌐 VCC Network Status</h2>
+      <p style={{ fontSize: '24px', color: isOnline ? 'green' : 'red' }}>
+        {isOnline ? 'You are Online ✅' : 'You are Offline ❌'}
+      </p>
+    </div>
+  );
+}
+
+export default VCCOnlineStatus;
+</body>
+</html>

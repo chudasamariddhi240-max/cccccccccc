@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jewelry Shop</title>
+  <style>
+    *{
+       scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      
+    }
+    /* --- Navbar Styles --- */
+.navbar {
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 50px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  flex-wrap: wrap;
+  z-index: 10;
+  margin-bottom: 0;  /* Ensure no bottom margin */
+  background-color: #1f1f1f;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: bold;
+  cursor: pointer;
+  letter-spacing: 1px;
+    color: white;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin: 0; /* remove default ul margin */
+  padding: 0; /* remove default ul padding */
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s, border-bottom 0.3s;
+  padding-bottom: 2px;
+  
+}
+
+.nav-links li a:hover {
+  color: #fff5cc;
+  border-bottom: 2px solid #fff5cc;
+}
+
+/* --- Slider Styles --- */
+.slider {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  margin-top: 0; /* NO gap between navbar and slider */
+    scroll-behavior: smooth;
+}
+
+.slides {
+  display: flex;
+  width: calc(100vw * 4); /* for 4 slides */
+  animation: slide 12s infinite;
+}
+
+.slide {
+  width: 100vw;
+  height: 500px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+/* Animation */
+@keyframes slide {
+  0%   { transform: translateX(0); }
+  25%  { transform: translateX(-100vw); }
+  50%  { transform: translateX(-200vw); }
+  75%  { transform: translateX(-300vw); }
+  100% { transform: translateX(0); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 20px;
+  }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    background-color: #2e2e2e;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+  .nav-links.active {
+    display: flex;
+  }
+  .slider {
+    height: 250px;
+  }
+  .slide {
+    height: 250px;
+  }
+}
+.collections {
+  padding: 50px 10%;
+  background-color: #2c2c2c; /* darker tone */
+  text-align: center;
+}
+
+.collections h2 {
+  font-size: 36px;
+    color: #f5e4b8;
+  margin-bottom: 40px;
+  font-weight: bold;
+}
+
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.collection-card {
+  
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+
+
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(176, 141, 87, 0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.collection-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 20px rgba(176, 141, 87, 0.3);
+}
+
+.collection-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.collection-card h3 {
+    color: #f5e4b8;
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+
+.collection-card p {
+
+  font-size: 16px;
+  margin-bottom: 20px;
+    color: #f5e4b8;
+}
+
+.collection-card button {
+  background-color: #b08d57;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.collection-card button:hover {
+  background-color: #d4af37;
+}
+.contact-section {
+  background-color: #1f1f1f;
+  color: #f5e4b8;
+  padding: 60px 10%;
+  text-align: center;
+}
+
+.contact-section h2 {
+  font-size: 36px;
+  margin-bottom: 40px;
+}
+
+.contact-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.contact-info {
+  flex: 1;
+  min-width: 280px;
+  font-size: 18px;
+  text-align: left;
+}
+
+.contact-info a {
+  color: #f5e4b8;
+  text-decoration: underline;
+}
+
+.contact-form {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.contact-form button {
+  background-color: #b08d57;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.contact-form button:hover {
+  background-color: #d4af37;
+}
+
+/* ✅ Mobile Responsive Fix */
+@media (max-width: 768px) {
+  .contact-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .contact-info {
+    text-align: center;
+  }
+
+  .contact-form {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .contact-section {
+    padding: 40px 20px;
+  }
+
+  .contact-section h2 {
+    font-size: 28px;
+  }
+}
+
+
+
+
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <!-- ✅ Added onclick below -->
+    <div class="logo" onclick="toggleMenu()">💎 Gilded Grace </div>
+  <ul class="nav-links" id="navLinks">
+  <li><a href="#home">Home</a></li>
+  <li><a href="#collections">Collections</a></li>
+  <li><a href="#about">About Us</a></li>
+  <li><a href="#contact">Contact</a></li> <!-- future section -->
+</ul>
+  </nav>
+  <!-- Add below navbar in body -->
+   <!-- add slider  -->
+<div class="slider" id="home">
+  <div class="slides">
+    <img src="https://img.freepik.com/premium-photo/jewelry-photography_808279-2.jpg?ga=GA1.1.264788494.1750400330&semt=ais_hybrid&w=740" class="slide" />
+    <img src="https://img.freepik.com/premium-photo/indian-traditional-antique-jewelry-stone-diamond-jewelry-ring-ai-generated_848094-3954.jpg?ga=GA1.1.264788494.1750400330&semt=ais_hybrid&w=740" class="slide" />
+    <img src="https://img.freepik.com/premium-photo/ethnic-jewellery-low-light_864595-508.jpg?ga=GA1.1.264788494.1750400330&semt=ais_hybrid&w=740" class="slide" />
+    <img src="https://img.freepik.com/premium-photo/jewelry-photography_808279-4.jpg?ga=GA1.1.264788494.1750400330&semt=ais_hybrid&w=740" class="slide" />
+    <img src="https://img.freepik.com/premium-photo/jewelry-photography_808279-8.jpg?ga=GA1.1.264788494.1750400330&semt=ais_hybrid&w=740" class="slide" />
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb_7fNMpe5RVCYr7tV1vTnPMwZ_Js4uk5q-g&s" class="slide" />
+
+  </div>
+</div>
+<!-- close the slider -->
+ <section class="collections" id="collections">
+  <h2>Our Collections</h2>
+  <div class="collection-grid">
+    <div class="collection-card">
+      <img src="https://images.unsplash.com/photo-1512163143273-bde0e3cc7407?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cmluZ3xlbnwwfHwwfHx8MA%3D%3D" alt="Rings" />
+      <h3>Rings</h3>
+      <p>Elegant and timeless rings for every occasion.</p>
+      <button>Shop Now</button>
+    </div>
+    <div class="collection-card">
+      <img src="https://th.bing.com/th/id/OIP.hT36vM4JXhnAtMFkQYwe0QHaF8?w=252&h=203&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="Necklaces" />
+      <h3>Necklaces</h3>
+      <p>Beautiful necklaces to complement your style.</p>
+      <button>Shop Now</button>
+    </div>
+    <div class="collection-card">
+      <img src="https://th.bing.com/th/id/OIP.WxF6kGAIsVRHLbc75YpqygHaIt?w=180&h=211&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="Earrings" />
+      <h3>Earrings</h3>
+      <p>Stunning earrings that add sparkle to your look.</p>
+      <button>Shop Now</button>
+    </div>
+    <div class="collection-card">
+      <img src="https://th.bing.com/th/id/OIP.9fkJp99eCuAVQrQerTvHpAHaGV?w=200&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="Bracelets" />
+      <h3>Bracelets</h3>
+      <p>Chic bracelets for any occasion.</p>
+      <button>Shop Now</button>
+    </div>
+      <div class="collection-card">
+  <img src="https://th.bing.com/th/id/OIP.VHMnH5c0Hu8SNDt9cekZ2gHaE7?w=296&h=197&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="Boho Flower Anklet" />
+  <h3>Anklets</h3>
+  <p>Graceful anklets that jingle with every step.</p>
+  <button>Shop Now</button>
+</div>
+<div class="collection-card">
+  <img src="https://th.bing.com/th/id/OIP.iBs4xmfiwFn92bC_dTER_gHaHa?w=187&h=188&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="Nose Pins" />
+  <h3>Nose Pins</h3>
+  <p>Delicate nose pins crafted to enhance your beauty.</p>
+  <button>Shop Now</button>
+</div>
+<div class="collection-card">
+  <img src="https://th.bing.com/th/id/OIP.bW-1PagmFKbtIghEiDYMVgHaHa?w=210&h=210&c=7&r=0&o=7&dpr=1.4&pid=1.7&rm=3" alt="Maang Tikka" />
+  <h3>Maang Tikka</h3>
+  <p>Traditional tikka designs that complete your bridal look.</p>
+  <button>Shop Now</button>
+</div>
+<div class="collection-card">
+  <img src="https://th.bing.com/th/id/OIP.Fgvjeysx2i1Dx4sGsPYl5AHaHa?w=208&h=195&c=7&r=0&o=7&dpr=1.4&pid=1.7&rm=3" alt="Bangles" />
+  <h3>Bangles</h3>
+  <p>Elegant bangles that resonate with tradition and grace.</p>
+  <button>Shop Now</button>
+</div>
+<div class="collection-card">
+  <img src="https://th.bing.com/th/id/OIP.nwaaExqGgPXhsbPvMotH6gHaHa?w=199&h=199&c=7&r=0&o=7&dpr=1.4&pid=1.7&rm=3" alt="Hair Pins" />
+  <h3>Hair Pins</h3>
+  <p>Decorative hair pins to complete your festive hairstyle.</p>
+  <button>Shop Now</button>
+</div>
+
+    </div>
+  
+  
+  </div>
+<section class="collections" style="background-color: #f3f3f3; color: #2c2c2c; margin-top: 50px;" id="about" >
+  <!-- Optional image -->
+<img src="https://th.bing.com/th/id/OIP.o33BaINbJg80QZ_sWTU5mwHaE8?w=266&h=180&c=7&r=0&o=7&dpr=1.4&pid=1.7&rm=3" 
+     alt="Jewelry Store" 
+     style="max-width: 100%; border-radius: 12px; margin-top: 30px; margin-bottom: 30px;" />
+
+
+  <h2 style="color: #b08d57;">About Us</h2>
+<p style="font-size: 18px; max-width: 800px; margin: 0 auto; line-height: 1.8;">
+  Welcome to <strong style="color:#b08d57;">Gilded Grace Jewels</strong> – where <em>tradition meets elegance</em>. 💫  
+  <br /><br />
+  With a passion for craftsmanship and over a decade of experience, we design <strong>timeless jewelry</strong> for modern and royal souls alike.  
+  <br /><br />
+  Every piece is made with care, sparkle ✨, and love ❤️ – because you deserve nothing less.  
+  <br /><br />
+  <strong>Visit us today and become part of our legacy. 👑</strong>
+</p>
+
+</section>
+<section id="contact" class="contact-section">
+  <h2>Contact Us</h2>
+
+  <div class="contact-container">
+    <!-- Contact Info -->
+    <div class="contact-info" >
+      <p><strong>📍 Address:</strong> Gilded Grace Jewels, Surat, Gujarat, India</p>
+      <p><strong>📞 Phone:</strong> +91 98765 43210</p>
+      <p><strong>📧 Email:</strong> support@gildedgrace.com</p>
+      <p><strong>📱 Follow Us:</strong>
+        <a href="#" target="_blank">Instagram</a> |
+        <a href="#" target="_blank">Facebook</a>
+      </p>
+    </div>
+
+    <!-- Contact Form -->
+<form class="contact-form" id="contactForm">
+  <input type="text" placeholder="chudasama riddhi" required />
+  <input type="email" placeholder="chudasamariddhi240@gmail.com" required />
+  <textarea placeholder="phone number : 6358031781" rows="4" required></textarea>
+  <button type="submit">Send Message</button>
+</form>
+
+<!-- ✅ Thank you message div -->
+<p id="thankYouMessage" style="display:none; color: lightgreen; font-size: 18px; margin-top: 20px;">
+  🎉 Thank you for reaching out! We’ll get back to you soon.
+</p>
+
+</section>
+
+
+
+
+
+
+  <!-- ✅ JavaScript works when logo is clicked -->
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('navLinks');
+      nav.classList.toggle('active');
+    }
+    document.getElementById("contactForm").addEventListener("submit", function (e) {
+    e.preventDefault(); // prevent page reload
+
+    // Show thank you message
+    document.getElementById("thankYouMessage").style.display = "block";
+
+    // Optionally clear form
+    this.reset();
+
+    // Hide the message after 5 seconds (optional)
+    setTimeout(function () {
+      document.getElementById("thankYouMessage").style.display = "none";
+    }, 5000);
+  });
+  </script>
+</body>
+</html>

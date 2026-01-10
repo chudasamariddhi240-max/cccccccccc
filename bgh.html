@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+
+    <style>
+        body {
+            height: 200VH;
+            transition: .5s;
+        }
+    </style>
+</head>
+
+<body onscroll="vs()">
+
+
+    <script>
+        function vs() {
+            var vs = window.scrollY;
+
+            if (vs > 600) {
+                document.body.style.background = "red"
+            }
+            else if (vs > 400) {
+                document.body.style.background = "lightblue"
+
+            }
+
+            else if (vs > 200) {
+                document.body.style.background = "yellow"
+
+            }
+
+            else {
+                document.body.style.background = "green"
+
+            }
+        }
+
+        // vs()
+    </script>
+</body>
+
+</html>

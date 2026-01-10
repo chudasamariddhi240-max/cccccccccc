@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="tasklist"></div>
+    <script>
+        document.body.addEventListener("keydown", function (event) {
+            var op = document.getElementById("tasklist");
+
+
+            switch (event.key) {
+                case "a":
+                    var inp = prompt("Please enter any task..");
+                    let h1 = document.createElement("h1");
+                    h1.innerHTML = inp;
+                    op.appendChild(h1);
+
+                    break;
+                default:
+                    alert("please enter valid key..")
+            }
+        })
+    </script>
+</body>
+
+</html>

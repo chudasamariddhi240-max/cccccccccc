@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Font Awesome (probably overkill, but I like the icons) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    /* 
+       Basic reset – I usually paste this from an older project
+       Might clean it up later if needed.
+    */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Color variables (naming isn't perfect, but it works) */
+    :root {
+        --primary: #004d99;
+        --secondary: #007acc;
+        --accent: #ff6b6b;
+        --light: #f2f6fc;
+        --dark: #333;
+        --success: #28a745;
+        --warning: #ffc107;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f8fafc;
+        color: var(--dark);
+        line-height: 1.6;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: auto;
+        padding: 0 15px;
+    }
+
+    /* ================= NAVBAR ================= */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(135deg, var(--primary), #00264d);
+        padding: 15px 30px;
+        color: #fff;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        flex-wrap: wrap;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+        font-size: 28px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .logo i {
+        color: var(--accent);
+    }
+
+    .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 25px;
+    }
+
+    .nav-links a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 500;
+        padding: 8px 15px;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+        background: var(--secondary);
+        transform: translateY(-2px);
+    }
+
+    /* Hamburger button – only shows on small screens */
+    .menu-toggle {
+        display: none;
+        font-size: 26px;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+    }
+
+    /* ================= HERO ================= */
+    .hero {
+        background:
+            linear-gradient(rgba(0,77,153,.85), rgba(0,38,77,.95)),
+            url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3")
+            center/cover no-repeat;
+        color: white;
+        text-align: center;
+        padding: 80px 20px;
+        margin-bottom: 40px;
+    }
+
+    .hero h1 {
+        font-size: 2.8rem;
+        margin-bottom: 20px;
+    }
+
+    .hero p {
+        max-width: 700px;
+        margin: 0 auto 30px;
+        font-size: 1.2rem;
+    }
+
+    .btn {
+        display: inline-block;
+        background: var(--accent);
+        color: #fff;
+        padding: 12px 25px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: all .3s ease;
+    }
+
+    .btn:hover {
+        background: #ff5252;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+
+    /* ================= SLIDER ================= */
+    .slider-container {
+        max-width: 1000px;
+        margin: 40px auto;
+        overflow: hidden;
+        position: relative;
+        border-radius: 15px;
+        box-shadow: 0 15px 30px rgba(0,0,0,.15);
+    }
+
+    .slider-track {
+        display: flex;
+    }
+
+    .slide {
+        min-width: 100%;
+        display: none; /* toggled via JS */
+    }
+
+    .slide.active {
+        display: block;
+    }
+
+    .slide img {
+        width: 100%;
+        display: block;
+        border-radius: 15px;
+    }
+
+    .nav-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255,255,255,0.8);
+        border: none;
+        font-size: 22px;
+        padding: 14px 18px;
+        cursor: pointer;
+        border-radius: 50%;
+        transition: background .3s ease;
+    }
+
+    .nav-arrow:hover {
+        background: white;
+    }
+
+    .prev { left: 20px; }
+    .next { right: 20px; }
+
+    .dots {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .dots button {
+        height: 14px;
+        width: 14px;
+        border-radius: 50%;
+        border: none;
+        margin: 0 6px;
+        background: rgba(255,255,255,.6);
+        cursor: pointer;
+    }
+
+    .dots button.active {
+        background: #fff;
+        transform: scale(1.2);
+    }
+
+    /* ================= FORMS ================= */
+    .form-section {
+        padding: 60px 0;
+        background: #fff;
+    }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 40px;
+        font-size: 2.2rem;
+        color: var(--primary);
+    }
+
+    .form-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: center;
+    }
+
+    .form-card {
+        width: 100%;
+        max-width: 500px;
+        padding: 30px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,.08);
+        transition: transform .3s ease;
+    }
+
+    .form-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .form-header {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .form-header i {
+        font-size: 38px;
+        color: var(--secondary);
+        margin-bottom: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 18px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 500;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        font-size: 15px;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: var(--secondary);
+        box-shadow: 0 0 0 3px rgba(0,122,204,.2);
+    }
+
+    /* ================= FEATURES ================= */
+    .features {
+        padding: 60px 0;
+        background: var(--light);
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+    }
+
+    .feature-card {
+        background: white;
+        padding: 28px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,.05);
+    }
+
+    .feature-card i {
+        font-size: 38px;
+        color: var(--secondary);
+        margin-bottom: 18px;
+    }
+
+    /* ================= FOOTER ================= */
+    footer {
+        background: var(--primary);
+        color: white;
+        padding: 40px 0 20px;
+        text-align: center;
+    }
+
+    .footer-content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: space-around;
+    }
+
+    .footer-section {
+        min-width: 240px;
+    }
+
+    .footer-section a {
+        display: block;
+        color: rgba(255,255,255,.8);
+        text-decoration: none;
+        margin-bottom: 8px;
+    }
+
+    .footer-section a:hover {
+        color: white;
+    }
+
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 14px;
+        margin-top: 12px;
+    }
+
+    .copyright {
+        margin-top: 30px;
+        border-top: 1px solid rgba(255,255,255,.1);
+        padding-top: 15px;
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 768px) {
+        .menu-toggle { display: block; }
+
+        .nav-links {
+            width: 100%;
+            display: none;
+            flex-direction: column;
+            background: var(--primary);
+            margin-top: 15px;
+            padding: 15px 0;
+            border-radius: 8px;
+        }
+
+        .nav-links.show {
+            display: flex;
+        }
+
+        .hero h1 {
+            font-size: 1.9rem;
+        }
+    }
+</style>
+
+    
+</head>
+<body>
+    <!-- NAV -->
+<nav class="navbar">
+    <div class="logo">
+        <i class="fas fa-graduation-cap"></i>
+        <span>EduTrack</span>
+    </div>
+
+    <button class="menu-toggle" id="menuBtn">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <ul class="nav-links" id="navMenu">
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#">Students</a></li>
+        <li><a href="#">Reports</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Login</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <h1>Empowering Educators, Engaging Students</h1>
+        <p>EduTrack helps schools manage students, teachers, and parents without the usual admin headaches.</p>
+        <a href="#forms" class="btn">Get Started</a>
+    </div>
+</section>
+
+<!-- SLIDER -->
+<div class="slider-container">
+    <div class="slider-track" id="sliderTrack">
+        <div class="slide active">
+            <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=1000&q=80" alt="Students learning">
+        </div>
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1000&q=80" alt="Teacher with students">
+        </div>
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=1000&q=80" alt="Group study">
+        </div>
+    </div>
+
+    <button class="nav-arrow prev" id="prevBtn">&#10094;</button>
+    <button class="nav-arrow next" id="nextBtn">&#10095;</button>
+    <div class="dots" id="dotWrap"></div>
+</div>
+
+<!-- FORMS -->
+<section class="form-section" id="forms">
+    <div class="container">
+        <h2 class="section-title">Registration Forms</h2>
+
+        <div class="form-wrap">
+
+            <!-- Student -->
+            <div class="form-card">
+                <div class="form-header">
+                    <i class="fas fa-user-graduate"></i>
+                    <h3>Student Registration</h3>
+                </div>
+
+                <form id="studentForm">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" required>
+                    </div>
+                    <button class="btn">Register Student</button>
+                </form>
+            </div>
+
+            <!-- Teacher -->
+            <div class="form-card">
+                <div class="form-header">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <h3>Teacher Registration</h3>
+                </div>
+
+                <form id="teacherForm">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <button class="btn">Register Teacher</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <p>&copy; 2023 EduTrack. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    // NAV toggle – simple and gets the job done
+    const menuBtn = document.getElementById("menuBtn");
+    const navMenu = document.getElementById("navMenu");
+
+    menuBtn.addEventListener("click", function () {
+        navMenu.classList.toggle("show");
+    });
+
+    // SLIDER logic (not the cleanest, but readable)
+    const slides = document.querySelectorAll(".slide");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const dotWrap = document.getElementById("dotWrap");
+
+    let slideIndex = 0;
+
+    slides.forEach((s, idx) => {
+        const dot = document.createElement("button");
+        dot.addEventListener("click", () => goTo(idx));
+        dotWrap.appendChild(dot);
+    });
+
+    const dots = dotWrap.querySelectorAll("button");
+
+    function goTo(index) {
+        slides.forEach(s => s.classList.remove("active"));
+        dots.forEach(d => d.classList.remove("active"));
+
+        slides[index].classList.add("active");
+        dots[index].classList.add("active");
+        slideIndex = index;
+    }
+
+    function nextSlide() {
+        slideIndex = (slideIndex + 1) % slides.length;
+        goTo(slideIndex);
+    }
+
+    function prevSlide() {
+        slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+        goTo(slideIndex);
+    }
+
+    nextBtn.addEventListener("click", nextSlide);
+    prevBtn.addEventListener("click", prevSlide);
+
+    // Auto-play (might make this optional later)
+    setInterval(nextSlide, 5000);
+
+    goTo(0);
+
+    // FORM handling – placeholder alerts for now
+    document.getElementById("studentForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        alert("Student registered successfully!");
+        this.reset();
+    });
+
+    document.getElementById("teacherForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        alert("Teacher registered successfully!");
+        this.reset();
+    });
+</script>
+
+</body>
+</html>

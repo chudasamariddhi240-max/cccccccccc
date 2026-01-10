@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>VS</title>
+</head>
+<body>
+
+    <button onclick="openpop()">open popup</button>
+    <button onclick="closepop()">close  popup</button>
+    <div id="op"></div>
+    <script>
+        let popup;
+
+        function openpop(){
+           popup = window.open("", "veer", "width=200,height=200,left=500,top=300");
+           popup.document.write("<h1>this is another tab</h1>")
+        }
+
+        function closepop(){
+            popup.window.close()
+        }
+        
+    </script>
+</body>
+</html>
